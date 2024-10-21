@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT Request</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 16px;
+      color: #555;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .response {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .save-suggestion {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .save-suggestion a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .save-suggestion a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Ask ChatGPT</h2>
+
+  <form id="chatgptForm">
+    <div class="form-group">
+      <label for="request">Enter your question:</label>
+      <input type="text" id="request" name="request" placeholder="Type your question here..." required>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="response" class="response" style="display: none;">
+    <p><strong>Response:</strong></p>
+    <p id="responseText"></p>
+
+    <div class="save-suggestion">
+      <p>Would you like to save the result? <a href="#" id="saveResult">Click here</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('chatgptForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Simulate sending request and receiving response
+    const userRequest = document.getElementById('request').value;
+    
+    // Example API call (you'd need a real server-side integration for ChatGPT)
+    const fakeResponse = "This is a simulated response from ChatGPT for your question: \"" + userRequest + "\"";
+
+    // Display the response
+    document.getElementById('responseText').textContent = fakeResponse;
+    document.getElementById('response').style.display = 'block';
+  });
+
+  document.getElementById('saveResult').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    // Get the response text
+    const responseText = document.getElementById('responseText').textContent;
+
+    // Create a Blob and save it as a text file
+    const blob = new Blob([responseText], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'chatgpt_response.txt';
+    link.click();
+  });
+</script>
+
+</body>
+</html>
